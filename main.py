@@ -15,11 +15,17 @@ from contextlib import contextmanager
 working_dir = './canvas/'
 
 base_url = 'https://wenona.beta.instructure.com/api/v1/accounts/self/'
-token ='10235~70utcJeV5TMdrGQfhglYehQuj0T60pvdnyGFfluGuMDYVw89Uc199Jg4NSsj6qig'
+token = os.environ['TOKEN']
 header = {'Authorization' : 'Bearer {token}'.format(token=token)}
 payload = {'import_type' : 'instructure_csv', 'extension' : 'zip'}
 
-conn_string = 'DRIVER={FreeTDS};SERVER=WGS-SYNDB-01.wenona.nsw.edu.au\SYNERGETIC;DATABASE=Synergetic_AUNSW_WENONA_PRD;UID=crystal.svc;PWD=Ag0 mixture Weather method'
+DB_URL = os.environ['DB_URL']
+DB = os.environ['DB']
+DB_USER = os.environ['DB_USER']
+DB_PASSWORD = os.environ['DB_PASSWORD']
+DRIVER = os.environ['DRIVER']
+
+conn_string = 'DRIVER={DRIVER};SERVER={DB_URL};DATABASE={DB};UID={DB_USER};PWD={DB_PASSWORD}'.format(DRIVER=DRIVER, DB_URL=DB_URL, DB=DB, DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD)
 
 
 @contextmanager
